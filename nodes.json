@@ -1,0 +1,10 @@
+{
+  "nodes": [
+    {
+      "block": "L-block",
+      "index": 0,
+      "target": "http://localhost:8080",
+      "id": 0
+    }
+  ]
+}
