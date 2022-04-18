@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getNodes, setNodeBusy, setNotAwake } from "./../firebase/firestore.js";
+import {
+  getNodes,
+  setNodeBusy,
+  setNodeFree,
+  setNotAwake,
+} from "./../firebase/firestore.js";
 import fetch from "node-fetch";
 
 const detectPeopleSendLog = async (node) => {
@@ -9,10 +14,13 @@ const detectPeopleSendLog = async (node) => {
     const response = await fetch(`${target}/detect_people`).then((res) =>
       res.json()
     );
-    if (!!response.detect_people) {
+    if (!!response.detect_people && response.detect_people) {
       console.log(`${id} id detected people`);
+      await setNodeBusy(id);
+    } else {
+      console.log(`${id} id did not detect people`);
+      await setNodeFree(id);
     }
-    await setNodeBusy(id);
   } catch (error) {
     console.error(error);
     await setNotAwake(node.id);
