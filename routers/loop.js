@@ -54,6 +54,7 @@ router.get("/start", (req, res) => {
   try {
     interval = setInterval(async () => {
       console.log(`loop ${i}`);
+      i++;
       await loop();
     }, 30000);
     res.sendStatus(200);
