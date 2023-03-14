@@ -39,7 +39,7 @@ const loop = async () => {
     return false;
   }
   // for each awake node
-  for (const node of awakeNodes) {
+  for (let node of awakeNodes) {
     // target url
     detectPeopleSendLog(node);
   }
